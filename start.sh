@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 ruby /mumble.rb
-/usr/bin/supervisord
+exec /usr/sbin/murmurd -fg -ini /mumble-server.ini
