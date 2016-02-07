@@ -5,6 +5,14 @@ build:
     - DOCKER_HOST=unix:///var/run/host.sock
     - IMAGEID=chuyskywalker/murmur:$$BUILD_NUMBER-$$COMMIT
   commands:
+    - cat <<'EOF' > /etc/yum.repos.d/docker.repo
+      [dockerrepo]
+      name=Docker Repository
+      baseurl=https://yum.dockerproject.org/repo/main/centos/$releasever/
+      enabled=1
+      gpgcheck=1
+      gpgkey=https://yum.dockerproject.org/gpg
+      EOF
     - yum install -y docker-engine
     - docker build -t "$IMAGEID" .
     - docker login -u $$DOCKERHUB_USER -p $$DOCKERHUB_PASS -e $$DOCKERHUB_EMAIL
