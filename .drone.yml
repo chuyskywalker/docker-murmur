@@ -1,6 +1,12 @@
-publish:
-  docker:
-    username: fake
-    password: password
-    email: octocat@github.com
-    repo: octocat/hello-world
+build:
+  image: centos:7
+  commands:
+    - echo "totes tested"
+    - echo "for reals"
+
+#publish:
+#  docker:
+#    username: fake
+#    password: password
+#    email: octocat@github.com
+#    repo: octocat/hello-world
