@@ -2,10 +2,10 @@
 
 A docker container for Mumble Server which can be configured with environment variables
 
-| ENV Value | Usage |
-| -- | -- |
-| `SUPW` | The superuser password to be injected |
-| `ROOMS` | A comma separate list of rooms |
+| ENV Value | Usage                                 |
+| --------- | ------------------------------------- |
+| `SUPW`    | The superuser password to be injected |
+| `ROOMS`   | A comma separate list of rooms        |
 
 All together:
 
