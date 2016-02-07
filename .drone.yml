@@ -1,13 +1,13 @@
 
 build:
-  image: alpine:3.2
+  image: centos:7
   environment:
     - DOCKER_HOST=unix:///var/run/host.sock
     - IMAGEID=chuyskywalker/murmur:$$BUILD_NUMBER-$$COMMIT
   commands:
-    - apk --update add docker
-    - docker login -u $$DOCKERHUB_USER -p $$DOCKERHUB_PASS -e $$DOCKERHUB_EMAIL
+    - yum install -y docker-engine
     - docker build -t "$IMAGEID" .
+    - docker login -u $$DOCKERHUB_USER -p $$DOCKERHUB_PASS -e $$DOCKERHUB_EMAIL
     - docker push "$IMAGEID"
   volumes:
     - /var/run/docker.sock:/var/run/host.sock:rw
