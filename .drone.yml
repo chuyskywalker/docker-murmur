@@ -4,11 +4,13 @@ build:
   environment:
     - DOCKER_HOST=unix:///tmp/host.sock
     - IMAGEID=chuyskywalker/murmur:$$BUILD_NUMBER-$$COMMIT
+    - DOCKERHUB_USER=$$DOCKERHUB_USER
+    - DOCKERHUB_PASS=$$DOCKERHUB_PASS
+    - DOCKERHUB_EMAIL=$$DOCKERHUB_EMAIL
   volumes:
     - /var/run/docker.sock:/tmp/host.sock:rw
   commands:
     - ls -alh --color /tmp
-    - lasdkfjsldfkj
     - |
       cat <<'EOF' > /etc/yum.repos.d/docker.repo
       [dockerrepo]
@@ -20,7 +22,7 @@ build:
       EOF
     - yum install -y docker-engine
     - docker build -t "$IMAGEID" .
-    - docker login -u $$DOCKERHUB_USER -p $$DOCKERHUB_PASS -e $$DOCKERHUB_EMAIL
+    - docker login -u "$DOCKERHUB_USER" -p "$DOCKERHUB_PASS" -e "$DOCKERHUB_EMAIL"
     - docker push "$IMAGEID"
 
 #publish:
