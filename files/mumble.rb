@@ -22,6 +22,7 @@ class Channels
   property :name,       Text
 end
 DataMapper.finalize
+
 # Create channels
 rooms = ENV['ROOMS']
 exit if rooms.nil?
@@ -29,11 +30,12 @@ id = 1
 rooms.split(',').each do |room|
   puts "Creating #{room}"
   Channels.create(
-  channel_id: id,
-  server_id: 1,
-  parent_id: 0,
-  name: room,
-  inheritacl: 1)
+    channel_id: id,
+    server_id: 1,
+    parent_id: 0,
+    name: room,
+    inheritacl: 1
+  )
   id = id + 1
 end
 p Channels.all
