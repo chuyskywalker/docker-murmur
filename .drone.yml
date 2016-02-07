@@ -5,6 +5,7 @@ build:
     - DOCKER_HOST=unix:///var/run/host.sock
     - IMAGEID=chuyskywalker/murmur:$$BUILD_NUMBER-$$COMMIT
   commands:
+    - printenv
     - |
       cat <<'EOF' > /etc/yum.repos.d/docker.repo
       [dockerrepo]
