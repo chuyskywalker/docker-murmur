@@ -5,7 +5,6 @@ build:
     - DOCKER_HOST=unix:///var/run/host.sock
     - IMAGEID=chuyskywalker/murmur:$$BUILD_NUMBER-$$COMMIT
   commands:
-    - printenv
     - |
       cat <<'EOF' > /etc/yum.repos.d/docker.repo
       [dockerrepo]
@@ -16,6 +15,7 @@ build:
       gpgkey=https://yum.dockerproject.org/gpg
       EOF
     - yum install -y docker-engine
+    - ls -alh --color /var/run/host
     - docker build -t "$IMAGEID" .
     - docker login -u $$DOCKERHUB_USER -p $$DOCKERHUB_PASS -e $$DOCKERHUB_EMAIL
     - docker push "$IMAGEID"
