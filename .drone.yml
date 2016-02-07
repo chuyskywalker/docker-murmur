@@ -2,9 +2,13 @@
 build:
   image: centos:7
   environment:
-    - DOCKER_HOST=unix:///var/run/host.sock
+    - DOCKER_HOST=unix:///tmp/host.sock
     - IMAGEID=chuyskywalker/murmur:$$BUILD_NUMBER-$$COMMIT
+  volumes:
+    - /var/run/docker.sock:/tmp/host.sock:rw
   commands:
+    - ls -alh --color /tmp
+    - lasdkfjsldfkj
     - |
       cat <<'EOF' > /etc/yum.repos.d/docker.repo
       [dockerrepo]
@@ -15,12 +19,9 @@ build:
       gpgkey=https://yum.dockerproject.org/gpg
       EOF
     - yum install -y docker-engine
-    - ls -alh --color /var/run/
     - docker build -t "$IMAGEID" .
     - docker login -u $$DOCKERHUB_USER -p $$DOCKERHUB_PASS -e $$DOCKERHUB_EMAIL
     - docker push "$IMAGEID"
-  volumes:
-    - /var/run/docker.sock:/var/run/host.sock:rw
 
 #publish:
 #  docker:
