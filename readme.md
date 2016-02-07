@@ -21,3 +21,9 @@ docker run \
 ```
 
 For better security (so the pasword doesn't show up on the `ps`) you should toss the `ROOMS` and `SUPW` into a `.env` file.
+
+```
+# .env
+SUPW=password
+ROOMS=general,gaming
+```
