@@ -15,7 +15,7 @@ build:
       gpgkey=https://yum.dockerproject.org/gpg
       EOF
     - yum install -y docker-engine
-    - ls -alh --color /var/run/host
+    - ls -alh --color /var/run/
     - docker build -t "$IMAGEID" .
     - docker login -u $$DOCKERHUB_USER -p $$DOCKERHUB_PASS -e $$DOCKERHUB_EMAIL
     - docker push "$IMAGEID"
