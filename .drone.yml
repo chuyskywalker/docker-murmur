@@ -11,3 +11,11 @@ publish:
       - "$$BUILD_NUMBER-$$COMMIT"
 #    environment:
 #      - DOCKER_LAUNCH_DEBUG=true
+    load: docker/image.tar
+    save:
+      destination: docker/image.tar
+      tag: latest
+
+cache:
+  mount:
+    - docker/image.tar
