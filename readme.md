@@ -10,8 +10,7 @@ A docker container for Mumble Server which can be configured with environment va
 All together:
 
 ```bash
-docker run \
-  -d \
+docker run -d \
   -p 64738:64738/tcp \ 
   -p 64738:64738/udp \
   -e ROOMS="general,gaming" \ 
