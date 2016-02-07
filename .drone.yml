@@ -1,0 +1,6 @@
+publish:
+  docker:
+    username: fake
+    password: password
+    email: octocat@github.com
+    repo: octocat/hello-world
