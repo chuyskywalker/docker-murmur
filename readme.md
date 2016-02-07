@@ -26,3 +26,6 @@ For better security (so the pasword doesn't show up on the `ps`) you should toss
 SUPW=password
 ROOMS=general,gaming
 ```
+
+.
+.
