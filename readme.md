@@ -1,19 +1,23 @@
 # mumble-server (murmur)
 
-A docker container for Mumble Server configured with environment variables
+A docker container for Mumble Server which can be configured with environment variables
 
-```
-SUPW=superuserpassword
-ROOMS=general,gaming,music
-```
+| ENV Value | Usage |
+| -- | -- |
+| `SUPW` | The superuser password to be injected |
+| `ROOMS` | A comma separate list of rooms |
 
 All together:
 
 ```bash
-# checkout/clone && cd
-docker build -t murmur .
-docker run -d --name=murmur \
-  -p 64738:64738/tcp -p 64738:64738/udp \
-  -e ROOMS="general,gaming" -e SUPW=password \
-  murmur
+docker run \
+  -d \
+  -p 64738:64738/tcp \ 
+  -p 64738:64738/udp \
+  -e ROOMS="general,gaming" \ 
+  -e SUPW=password \
+  --name=murmur \
+  chuyskywalker/murmur
 ```
+
+For better security (so the pasword doesn't show up on the `ps`) you should toss the `ROOMS` and `SUPW` into a `.env` file.
