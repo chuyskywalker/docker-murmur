@@ -4,9 +4,9 @@ build:
     - echo "totes tested"
     - echo "for reals"
 
-#publish:
-#  docker:
-#    username: fake
-#    password: password
-#    email: octocat@github.com
-#    repo: octocat/hello-world
+publish:
+  docker:
+    username: chuyskywalker
+    password: $$DOCKERHUB_PASS
+    email: $$DOCKERHUB_EMAIL
+    repo: chuyskywalker/murmur
