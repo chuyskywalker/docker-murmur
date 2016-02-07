@@ -5,7 +5,8 @@ build:
     - DOCKER_HOST=unix:///var/run/host.sock
     - IMAGEID=chuyskywalker/murmur:$$BUILD_NUMBER-$$COMMIT
   commands:
-    - cat <<'EOF' > /etc/yum.repos.d/docker.repo
+    - |
+      cat <<'EOF' > /etc/yum.repos.d/docker.repo
       [dockerrepo]
       name=Docker Repository
       baseurl=https://yum.dockerproject.org/repo/main/centos/$releasever/
