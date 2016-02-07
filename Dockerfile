@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:trusty-20160119
 
 # Update apt, upgrade all pacakges, install the ones we need, do some gem installs, clean up apt
 RUN DEBIAN_FRONTEND=noninteractive apt-get -y update \
