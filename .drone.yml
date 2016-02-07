@@ -1,18 +1,30 @@
 
-publish:
-  docker:
-    username: chuyskywalker
-    password: $$DOCKERHUB_PASS
-    email: $$DOCKERHUB_EMAIL
-    repo: chuyskywalker/murmur
-    storage_driver: overlay
-    tag:
-      - latest
-      - "$$BUILD_NUMBER-$$COMMIT"
-    load: docker/image.tar
-    save:
-      destination: docker/image.tar
+build:
+  image: alpine:3.2
+  commands:
+    - apk --update add docker
+    - "export DOCKER_HOST=unix:///var/run/host.sock"
+    - "export IMAGEID=chuyskywalker/murmur:$$BUILD_NUMBER-$$COMMIT"
+    - docker login -u $$DOCKERHUB_USER -p $$DOCKERHUB_PASS -e $$DOCKERHUB_EMAIL
+    - docker build -t "$IMAGEID" .
+    - docker push "$IMAGEID"
+  volumes:
+    - /var/run/docker.sock:/var/run/host.sock:ro
 
-cache:
-  mount:
-    - docker/image.tar
+#publish:
+#  docker:
+#    username: chuyskywalker
+#    password: $$DOCKERHUB_PASS
+#    email: $$DOCKERHUB_EMAIL
+#    repo: chuyskywalker/murmur
+#    storage_driver: overlay
+#    tag:
+#      - latest
+#      - "$$BUILD_NUMBER-$$COMMIT"
+#    load: docker/image.tar
+#    save:
+#      destination: docker/image.tar
+#
+#cache:
+#  mount:
+#    - docker/image.tar
