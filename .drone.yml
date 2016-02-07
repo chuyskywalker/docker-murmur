@@ -1,15 +1,16 @@
 
 build:
   image: alpine:3.2
+  environment:
+    - DOCKER_HOST=unix:///var/run/host.sock
+    - IMAGEID=chuyskywalker/murmur:$$BUILD_NUMBER-$$COMMIT
   commands:
     - apk --update add docker
-    - "export DOCKER_HOST=unix:///var/run/host.sock"
-    - "export IMAGEID=chuyskywalker/murmur:$$BUILD_NUMBER-$$COMMIT"
     - docker login -u $$DOCKERHUB_USER -p $$DOCKERHUB_PASS -e $$DOCKERHUB_EMAIL
     - docker build -t "$IMAGEID" .
     - docker push "$IMAGEID"
   volumes:
-    - /var/run/docker.sock:/var/run/host.sock:ro
+    - /var/run/docker.sock:/var/run/host.sock:rw
 
 #publish:
 #  docker:
