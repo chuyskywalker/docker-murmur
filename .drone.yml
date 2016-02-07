@@ -10,3 +10,5 @@ publish:
     password: $$DOCKERHUB_PASS
     email: $$DOCKERHUB_EMAIL
     repo: chuyskywalker/murmur
+    environment:
+      - DOCKER_LAUNCH_DEBUG=true
