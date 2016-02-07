@@ -5,7 +5,7 @@ publish:
     password: $$DOCKERHUB_PASS
     email: $$DOCKERHUB_EMAIL
     repo: chuyskywalker/murmur
-    storage_driver: vfs
+    storage_driver: overlay
     tag:
       - latest
       - "$$BUILD_NUMBER-$$COMMIT"
