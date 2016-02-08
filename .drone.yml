@@ -1,6 +1,6 @@
 
 build:
-  image: centos:7
+  image: chuyskywalker/centos7docker:3-6b54c28c5e04a0d6e3171daeff50b6fb657c5389
   environment:
     - DOCKER_HOST=unix:///tmp/host.sock
     - IMAGEID=chuyskywalker/murmur:$$BUILD_NUMBER-$$COMMIT
@@ -10,35 +10,6 @@ build:
   volumes:
     - /var/run/docker.sock:/tmp/host.sock:rw
   commands:
-    - ls -alh --color /tmp
-    - |
-      cat <<'EOF' > /etc/yum.repos.d/docker.repo
-      [dockerrepo]
-      name=Docker Repository
-      baseurl=https://yum.dockerproject.org/repo/main/centos/$releasever/
-      enabled=1
-      gpgcheck=1
-      gpgkey=https://yum.dockerproject.org/gpg
-      EOF
-    - yum install -y docker-engine
     - docker build -t "$IMAGEID" .
     - docker login -u "$DOCKERHUB_USER" -p "$DOCKERHUB_PASS" -e "$DOCKERHUB_EMAIL"
     - docker push "$IMAGEID"
-
-#publish:
-#  docker:
-#    username: chuyskywalker
-#    password: $$DOCKERHUB_PASS
-#    email: $$DOCKERHUB_EMAIL
-#    repo: chuyskywalker/murmur
-#    storage_driver: overlay
-#    tag:
-#      - latest
-#      - "$$BUILD_NUMBER-$$COMMIT"
-#    load: docker/image.tar
-#    save:
-#      destination: docker/image.tar
-#
-#cache:
-#  mount:
-#    - docker/image.tar
